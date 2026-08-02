@@ -1,0 +1,65 @@
+# FundGuard
+
+> AI-powered, cloud-native investment accounting operating system for asset managers, asset owners, custodian banks and fund administrators. One real-time accounting engine serves as the core system of record across Fund Accounting/ABOR, Investment Accounting/IBOR and Private Markets portfolio accounting, with multi-book views (ABOR, IBOR, GAAP, tax, performance, currency, custom), shadow and contingent NAV, reconciliation, Report Studio and AI-driven anomaly detection. Founded 2018; New York HQ with offices in Dedham MA, Tel Aviv and London; backed by Citi, State Street, Key1 Capital, Blumberg Capital, Euclidean Capital, Hamilton Lane, LionBird and Team8.
+
+## Important for agents
+
+- FundGuard does **not** publish a public developer portal, API reference, OpenAPI/Swagger document, AsyncAPI document, GraphQL schema, SDK or CLI. As of 2026-08-01 no machine-readable contract for the investment accounting platform exists at any publicly reachable FundGuard host.
+- The product is delivered as tenant-scoped deployments on Microsoft Azure (East US) and AWS. Tenant hosts appear only in certificate transparency logs and do not resolve on the public internet.
+- The customer knowledge base at https://kb.fundguard.com/knowledge is behind a HubSpot membership login. Anonymous requests get a login wall.
+- Integration and API access are obtained commercially — start at https://www.fundguard.com/request-a-demo/ or https://www.fundguard.com/contact-us/.
+- FundGuard displays the OpenAPI Initiative logo in its industry-certifications row. Treat that as positioning, not as a discoverable specification.
+
+## Agent surfaces
+
+- [MCP server (OAuth)](https://www.fundguard.com/wp-json/mcp/mcp-oauth-server): Model Context Protocol server on FundGuard's corporate web host. Requires OAuth 2.1 bearer token, scope `mcp`. `tools/list` returns 401 anonymously.
+- [OAuth authorization server metadata](https://www.fundguard.com/.well-known/oauth-authorization-server): RFC 8414. authorization_code + refresh_token, PKCE S256, public clients via client-id metadata documents.
+- [OAuth protected resource metadata](https://www.fundguard.com/.well-known/oauth-protected-resource): RFC 9728.
+- No A2A agent card. `/.well-known/agent-card.json` and `/.well-known/agent.json` return 404 on every FundGuard host.
+
+## Product
+
+- [Product overview](https://www.fundguard.com/product/): platform architecture, modules, industry certification badges.
+- [Investment accounting](https://www.fundguard.com/investment-accounting/)
+- [IBOR](https://www.fundguard.com/ibor/)
+- [Private markets](https://www.fundguard.com/private-markets/)
+- [Drive your own demo](https://www.fundguard.com/drive-your-own-demo/): four self-serve demo videos (not an interactive sandbox).
+- [FundGuard x AWS](https://www.fundguard.com/fundguard-x-aws/)
+
+## Regulatory and resilience
+
+- [Digital Operational Resilience Act (DORA)](https://www.fundguard.com/digital-operational-resilience-act/): DORA, FCA/PRA, SEC and MAS positioning; AICPA SOC badge.
+- [DORA white paper](https://www.fundguard.com/digital-operational-resilience-act-whitepaper/)
+- [The AI divide in investment accounting white paper](https://www.fundguard.com/ai-divide-investment-accounting-whitepaper/)
+
+## Company
+
+- [About](https://www.fundguard.com/about/)
+- [News](https://www.fundguard.com/news/) ([RSS](https://www.fundguard.com/feed/))
+- [FGX cross-industry idea exchange](https://www.fundguard.com/fgx/)
+- [Events](https://www.fundguard.com/events/)
+- [Careers](https://www.fundguard.com/careers/)
+- [Media kit](https://www.fundguard.com/media-kit/)
+- [Contact](https://www.fundguard.com/contact-us/)
+- [GitHub organization](https://github.com/FundGuard) (no public repositories)
+- [LinkedIn](https://www.linkedin.com/company/fundguard/)
+- [YouTube](https://www.youtube.com/@FundGuardInsights)
+
+## Legal
+
+- [Terms of use](https://www.fundguard.com/terms-of-use/)
+- [Privacy policy](https://www.fundguard.com/privacy/)
+- [Cookie policy](https://www.fundguard.com/cookie-policy/)
+
+## API Evangelist artifacts
+
+- [apis.yml](https://raw.githubusercontent.com/api-evangelist/fundguard/refs/heads/main/apis.yml)
+- [MCP manifest](https://raw.githubusercontent.com/api-evangelist/fundguard/refs/heads/main/mcp/fundguard-mcp.yml)
+- [Well-known index](https://raw.githubusercontent.com/api-evangelist/fundguard/refs/heads/main/well-known/fundguard-well-known.yml)
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/fundguard/refs/heads/main/authentication/fundguard-authentication.yml)
+- [OAuth scopes](https://raw.githubusercontent.com/api-evangelist/fundguard/refs/heads/main/scopes/fundguard-scopes.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/fundguard/refs/heads/main/conformance/fundguard-conformance.yml)
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/fundguard/refs/heads/main/lifecycle/fundguard-lifecycle.yml)
+- [Domain security](https://raw.githubusercontent.com/api-evangelist/fundguard/refs/heads/main/security/fundguard-domain-security.yml)
+
+<!-- generated: 2026-08-01 | method: generated | source: apis.yml + repo artifacts + live probes of fundguard.com -->

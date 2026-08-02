@@ -1,0 +1,28 @@
+generated: '2026-08-01'
+method: probed
+source: https://www.fundguard.com/.well-known/oauth-authorization-server
+note: >-
+  Derived from published OAuth metadata rather than an OpenAPI (FundGuard publishes no spec). The
+  authorization server advertises exactly one scope. No scopes/permissions reference page exists on any
+  public FundGuard host; nothing beyond the advertised value is recorded.
+schemes:
+- name: mcp-oauth
+  source: well-known/fundguard-oauth-authorization-server.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.fundguard.com/oauth/authorize
+    tokenUrl: https://www.fundguard.com/oauth/token
+scopes:
+- scope: mcp
+  description: >-
+    Access the MCP server exposed at https://www.fundguard.com/wp-json/mcp/mcp-oauth-server. The scope is
+    advertised in both scopes_supported of the authorization-server metadata and scopes_supported of the
+    protected-resource metadata. No finer-grained scope decomposition is published.
+  flows: [authorizationCode]
+  sources:
+  - well-known/fundguard-oauth-authorization-server.json
+  - well-known/fundguard-oauth-protected-resource.json
+x-evidence:
+  fetched: '2026-08-01'
+  url: https://www.fundguard.com/.well-known/oauth-authorization-server
+  http_status: 200

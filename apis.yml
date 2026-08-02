@@ -1,23 +1,135 @@
 aid: fundguard
 name: FundGuard
-description: 'FundGuard is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  FundGuard is an AI-powered, cloud-native investment accounting operating system for asset managers, asset owners,
+  custodian banks and fund administrators. A single real-time accounting engine acts as the core system of record
+  across Fund Accounting/ABOR, Investment Accounting/IBOR and Private Markets portfolio accounting, supporting mutual
+  funds, ETFs, hedge funds, insurance products and pension funds with multi-book views (ABOR, IBOR, GAAP, tax,
+  performance, currency and custom), shadow and contingent NAV, reconciliation, Report Studio and AI-driven anomaly
+  detection with suggested resolutions. Founded 2018, headquartered in New York with offices in Dedham MA, Tel Aviv
+  and London; backed by Citi, State Street, Key1 Capital, Blumberg Capital, Euclidean Capital, Hamilton Lane, LionBird
+  and Team8, and running on AWS and Microsoft Azure. The platform is marketed as API-first for front- and middle-office
+  integration with portfolio management systems, custodians, administrators and data providers, but as of this pass
+  FundGuard publishes no public developer portal, API reference or machine-readable API contract — the customer
+  knowledge base at kb.fundguard.com is behind a login and the product runs on per-tenant hosts.
+image: https://www.fundguard.com/wp-content/uploads/2020/08/fundguard-logo-cropped.svg
 url: https://raw.githubusercontent.com/api-evangelist/fundguard/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
-- Company
-apis: []
+- investment-accounting
+- fund-accounting
+- ibor
+- abor
+- nav
+- asset-management
+- portfolio-accounting
+- private-markets
+- financial-services
+- fintech
+- saas
+- artificial-intelligence
+- mcp
+apis:
+- name: FundGuard Website MCP Server
+  description: >-
+    A Model Context Protocol server served from FundGuard's own corporate web host via the WordPress MCP adapter,
+    advertised through RFC 8414 OAuth authorization-server metadata and RFC 9728 protected-resource metadata at
+    www.fundguard.com. Authorization is OAuth 2.1 authorization_code with PKCE (S256), public clients via client-id
+    metadata documents, and a single `mcp` scope. tools/list returned HTTP 401 anonymously on 2026-08-01, so the tool
+    set and input schemas require an authenticated introspection. This is the corporate/marketing site surface — it is
+    NOT the FundGuard investment accounting platform API, which is not publicly documented.
+  humanURL: https://www.fundguard.com/
+  baseURL: https://www.fundguard.com/wp-json/mcp/mcp-oauth-server
+  tags:
+  - mcp
+  - agent-native
+  - oauth2
+  properties:
+  - type: MCPServer
+    url: mcp/fundguard-mcp.yml
+  - type: WellKnown
+    url: well-known/fundguard-well-known.yml
+  - type: Authentication
+    url: authentication/fundguard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/fundguard-scopes.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/fundguard-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/fundguard_stock/
+  url: https://www.fundguard.com/
+- type: Documentation
+  url: https://www.fundguard.com/product/
+- type: Support
+  url: https://www.fundguard.com/contact-us/
+- type: HelpCenter
+  url: https://kb.fundguard.com/knowledge
+- type: Blog
+  url: https://www.fundguard.com/news/
+- type: BlogRSS
+  url: https://www.fundguard.com/feed/
+- type: GitHubOrganization
+  url: https://github.com/FundGuard
+- type: SignUp
+  url: https://www.fundguard.com/request-a-demo/
+- type: TermsOfService
+  url: https://www.fundguard.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.fundguard.com/privacy/
+- type: CookiePolicy
+  url: https://www.fundguard.com/cookie-policy/
+- type: Compliance
+  url: https://www.fundguard.com/digital-operational-resilience-act/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/fundguard/
+- type: Twitter
+  url: https://twitter.com/FundGuard
+- type: YouTube
+  url: https://www.youtube.com/@FundGuardInsights
+- type: Careers
+  url: https://www.fundguard.com/careers/
+- type: MediaKit
+  url: https://www.fundguard.com/media-kit/
+- type: WellKnown
+  url: well-known/fundguard-well-known.yml
+- type: MCPServer
+  url: mcp/fundguard-mcp.yml
+- type: Authentication
+  url: authentication/fundguard-authentication.yml
+- type: OAuthScopes
+  url: scopes/fundguard-scopes.yml
+- type: Conformance
+  url: conformance/fundguard-conformance.yml
+- type: Lifecycle
+  url: lifecycle/fundguard-lifecycle.yml
+- type: LLMsTxt
+  url: llms/fundguard-llms.txt
+x-secondary-market: https://forgeglobal.com/fundguard_stock/
+x-contract-discovery:
+  date: '2026-08-01'
+  result: no-public-machine-readable-contract
+  openapi: >-
+    probed /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api/openapi.json,
+    /swagger/v1/swagger.json, /api-docs, /docs, /redoc on www.fundguard.com, kb.fundguard.com and
+    platform.fundguard.com - all 404 or unresolvable
+  graphql: no /graphql surface found on any resolving host
+  asyncapi: no event, streaming or webhook documentation published
+  mcp: >-
+    found - https://www.fundguard.com/wp-json/mcp/mcp-oauth-server (WordPress MCP adapter, OAuth-gated,
+    tools/list 401 anonymously)
+  a2a: /.well-known/agent-card.json and /.well-known/agent.json returned 404 on every host
+  hosts_enumerated_via: crt.sh certificate transparency (55 names) + DNS + sitemap
+x-enrichment:
+  date: '2026-08-01'
+  status: enriched
+  artifacts_added: 10
+  pass: local-v1

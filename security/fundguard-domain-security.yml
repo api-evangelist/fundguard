@@ -1,0 +1,58 @@
+generated: '2026-08-01'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.fundguard.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 15 09:23:39 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  server: nginx
+  x_content_type_options: nosniff
+  x_frame_options: SAMEORIGIN
+  referrer_policy: strict-origin-when-cross-origin
+- host: kb.fundguard.com
+  https: true
+  tls_version: TLSv1.3
+  hsts: true
+  hsts_max_age: 31536000
+  server: cloudflare
+  content_security_policy: upgrade-insecure-requests
+  note: HubSpot-hosted customer knowledge base behind a membership login
+domains:
+- domain: fundguard.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+  dmarc_record: 'v=DMARC1; p=reject; pct=100; rua=mailto:dmarc_agg@vali.email,mailto:dmarc-report@fundguard.com'
+  spf_record: v=spf1 a mx ip4:35.188.91.53 include:_spf.google.com ... -all
+  spf_all: '-all'
+  mta_sts: true
+  mta_sts_mode: enforce
+  mta_sts_policy: https://mta-sts.fundguard.com/.well-known/mta-sts.txt
+findings:
+- id: dangling-cname
+  severity: observation
+  host: platform.fundguard.com
+  detail: >-
+    platform.fundguard.com is a CNAME to dr82nty150q0v.cloudfront.net, which resolves NOERROR with no A or
+    AAAA records - the referenced CloudFront distribution no longer exists. The hostname is therefore
+    unreachable and the record is dangling. Observed 2026-08-01 against 8.8.8.8 and the local resolver.
+- id: no-caa
+  severity: observation
+  domain: fundguard.com
+  detail: no CAA records published, so any public CA may issue for the domain
+- id: no-dnssec
+  severity: observation
+  domain: fundguard.com
+  detail: no DNSKEY present; the zone is not DNSSEC signed
+- id: strong-email-auth
+  severity: positive
+  domain: fundguard.com
+  detail: SPF ends in -all, DMARC p=reject pct=100 with aggregate reporting, and MTA-STS mode=enforce
+x-evidence:
+  fetched: '2026-08-01'
+  method: dig (@8.8.8.8 and local resolver), openssl s_client, curl HEAD

@@ -1,0 +1,54 @@
+generated: '2026-08-01'
+method: searched
+source: https://www.fundguard.com/
+note: >-
+  Searched every public FundGuard surface for a versioning policy, deprecation policy, Sunset/Deprecation
+  header support, SLA and status page. None are published. The only versioned public artifact is the OAuth
+  metadata pair on www.fundguard.com, which carries no version identifier. Absence here is recorded data,
+  not an omission - a later pass should re-probe rather than re-search from scratch.
+versioning:
+  scheme: none-published
+  current: null
+  docs: null
+  note: >-
+    The MCP endpoint path (/wp-json/mcp/mcp-oauth-server) is namespaced but not versioned. The sibling
+    WordPress REST namespaces are versioned (wp/v2, wp-abilities/v1) but those are platform defaults, not a
+    FundGuard API contract.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: no deprecation or sunset policy published
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    Resilience language appears on https://www.fundguard.com/digital-operational-resilience-act/ ("built-in
+    failover", "contingent and shadow NAV capabilities ensure uninterrupted accounting and reporting",
+    "elastic scalability") but no numeric uptime target, RTO or RPO is published.
+status_page: null
+status_page_probes:
+- {url: 'https://status.fundguard.com/', result: NXDOMAIN}
+- {url: 'https://www.fundguard.com/status/', result: 404}
+release_notes:
+  url: null
+  note: >-
+    https://www.fundguard.com/news/ is a corporate press/news feed (RSS at
+    https://www.fundguard.com/feed/), not a dated product changelog. Product release notes, if any, sit
+    behind the kb.fundguard.com membership login.
+deprecated_operations: []
+platform_lifecycle_observations:
+- >-
+    Certificate transparency shows per-tenant deployment hosts on Azure East US
+    (app-fgkb6/7-eastus, login-fgkb5..9-eastus, login-azprd-eastus, automation-webapp-*-eastus) plus
+    environment wildcards (*.prod, *.preprod, *.staging, *.staging1, *.testing, *.kub-dev, *.kub-gated-1,
+    *.kub-gated-2, *.kub-preprod, *.kub-staging). None resolve publicly, which is consistent with a
+    tenant-scoped enterprise deployment model rather than a shared public API.
+- >-
+    platform.fundguard.com is a dangling CNAME to a CloudFront distribution that no longer exists - see
+    security/fundguard-domain-security.yml findings[].
+x-evidence:
+  fetched: '2026-08-01'
+  sources:
+  - https://www.fundguard.com/sitemap_index.xml
+  - https://www.fundguard.com/page-sitemap.xml
+  - https://crt.sh/?q=%25.fundguard.com

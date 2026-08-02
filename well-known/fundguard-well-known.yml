@@ -1,0 +1,79 @@
+generated: '2026-08-01'
+method: searched
+source: https://www.fundguard.com/.well-known/
+host: https://www.fundguard.com
+note: >-
+  Probed every /.well-known/ path in the pipeline against every FundGuard host that resolves. Only
+  www.fundguard.com answered with real documents; the two OAuth metadata documents below advertise a Model
+  Context Protocol server on the corporate WordPress host. Hosts probed and their result are recorded in
+  hosts_probed[] so a later pass does not repeat the work.
+documents:
+- path: /.well-known/oauth-authorization-server
+  spec: RFC 8414
+  status: 200
+  content_type: application/json
+  file: fundguard-oauth-authorization-server.json
+- path: /.well-known/oauth-protected-resource
+  spec: RFC 9728
+  status: 200
+  content_type: application/json
+  file: fundguard-oauth-protected-resource.json
+- path: /.well-known/security.txt
+  spec: RFC 9116
+  status: 404
+- path: /.well-known/openid-configuration
+  spec: OpenID Connect Discovery 1.0
+  status: 404
+- path: /.well-known/api-catalog
+  spec: RFC 9727
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404
+- path: /.well-known/agent-card.json
+  spec: A2A 1.0.0
+  status: 404
+- path: /.well-known/agent.json
+  spec: A2A pre-0.3 legacy
+  status: 404
+hosts_probed:
+- host: www.fundguard.com
+  resolves: true
+  result: two OAuth metadata documents returned 200; all other well-known paths 404
+- host: kb.fundguard.com
+  resolves: true
+  result: HubSpot-hosted customer knowledge base behind a membership login; all well-known paths 404
+- host: mta-sts.fundguard.com
+  resolves: true
+  result: /.well-known/mta-sts.txt returned 200 (STSv1, mode enforce, Google Workspace MX)
+- host: platform.fundguard.com
+  resolves: false
+  result: >-
+    dangling CNAME - resolves to dr82nty150q0v.cloudfront.net, which returns NOERROR with no A/AAAA records
+    (the CloudFront distribution no longer exists), so the host is unreachable
+- host: api.fundguard.com
+  resolves: false
+  result: NXDOMAIN
+- host: docs.fundguard.com
+  resolves: false
+  result: NXDOMAIN
+- host: developer.fundguard.com
+  resolves: false
+  result: NXDOMAIN
+- host: developers.fundguard.com
+  resolves: false
+  result: NXDOMAIN
+- host: app.fundguard.com
+  resolves: false
+  result: NXDOMAIN
+- host: status.fundguard.com
+  resolves: false
+  result: NXDOMAIN
+- host: trust.fundguard.com
+  resolves: false
+  result: NXDOMAIN
+- host: stream-gateway.fundguard.com
+  resolves: false
+  result: present in certificate transparency logs but does not resolve publicly
+x-evidence:
+  fetched: '2026-08-01'
+  method: HTTP GET, curl, following redirects

@@ -1,0 +1,48 @@
+generated: '2026-08-01'
+method: probed
+source: https://www.fundguard.com/.well-known/oauth-authorization-server
+note: >-
+  FundGuard publishes no OpenAPI, so no securitySchemes could be derived. The only machine-readable
+  authentication contract FundGuard serves publicly is the RFC 8414 OAuth authorization-server metadata and
+  the RFC 9728 protected-resource metadata that front the MCP server on www.fundguard.com. The investment
+  accounting platform's own authentication model is not publicly documented; tenant logins live on per-tenant
+  hosts (login-<tenant>-eastus.fundguard.com, seen only in certificate transparency logs and not resolvable
+  from the public internet).
+summary:
+  types: [oauth2]
+  api_key_in: []
+  oauth2_flows: [authorizationCode]
+  bearer_methods: [header]
+  pkce: [S256]
+schemes:
+- name: mcp-oauth
+  type: oauth2
+  protected_resource: https://www.fundguard.com/wp-json/mcp/mcp-oauth-server
+  issuer: https://www.fundguard.com
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.fundguard.com/oauth/authorize
+    tokenUrl: https://www.fundguard.com/oauth/token
+    revocationUrl: https://www.fundguard.com/oauth/revoke
+    refresh_supported: true
+    pkce: S256
+    scopes:
+      mcp: Access the FundGuard MCP server
+  client_registration:
+    dynamic_client_registration: false
+    client_id_metadata_document_supported: true
+  token_endpoint_auth_methods: [none]
+  sources:
+  - well-known/fundguard-oauth-authorization-server.json
+  - well-known/fundguard-oauth-protected-resource.json
+undocumented:
+- surface: FundGuard investment accounting platform API
+  reason: >-
+    marketed as API-first for portfolio management, custodian, administrator and data-provider integration,
+    but no developer portal, API reference, or auth documentation is published on any public FundGuard host
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://www.fundguard.com/.well-known/oauth-authorization-server
+  - https://www.fundguard.com/.well-known/oauth-protected-resource
+  http_status: 200
