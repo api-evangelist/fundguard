@@ -10,11 +10,17 @@ server:
   discovered_via: RFC 9728 OAuth protected-resource metadata on www.fundguard.com
 endpoints:
 - url: https://www.fundguard.com/wp-json/mcp/mcp-oauth-server
-  methods: [POST, GET, DELETE]
+  methods:
+  - POST
+  - GET
+  - DELETE
   auth: OAuth 2.1 bearer (scope `mcp`)
   anonymous_tools_list: 401 mcp_unauthorized
 - url: https://www.fundguard.com/wp-json/mcp/mcp-adapter-default-server
-  methods: [POST, GET, DELETE]
+  methods:
+  - POST
+  - GET
+  - DELETE
   auth: WordPress REST authentication (cookie/application password)
   anonymous_tools_list: 401 rest_forbidden
 authorization:
@@ -23,22 +29,24 @@ authorization:
   authorization_endpoint: https://www.fundguard.com/oauth/authorize
   token_endpoint: https://www.fundguard.com/oauth/token
   revocation_endpoint: https://www.fundguard.com/oauth/revoke
-  grant_types: [authorization_code, refresh_token]
+  grant_types:
+  - authorization_code
+  - refresh_token
   pkce: S256
-  token_endpoint_auth_methods: [none]
+  token_endpoint_auth_methods:
+  - none
   client_id_metadata_document_supported: true
-  scopes: [mcp]
+  scopes:
+  - mcp
 tools: []
-tools_note: >-
-  tools/list was POSTed anonymously with Accept: application/json, text/event-stream to both endpoints on
-  2026-08-01 and returned HTTP 401 in each case, so the live tool set and its inputSchemas are auth-gated.
-  The WordPress Abilities API endpoint that backs the tool list (/wp-json/wp-abilities/v1/abilities) also
-  returned 401. No tool list is recorded because none could be observed; nothing is inferred or invented.
-scope_note: >-
-  This MCP server is served from FundGuard's corporate WordPress site, not from the FundGuard investment
-  accounting platform. It is a genuine, provider-hosted MCP surface reachable at a FundGuard-controlled
-  origin and advertised through standards-based discovery metadata, but a consumer should not expect it to
-  expose fund/NAV/accounting operations. FundGuard's product API has no public documentation or contract.
+tools_note: 'tools/list was POSTed anonymously with Accept: application/json, text/event-stream to both
+  endpoints on 2026-08-01 and returned HTTP 401 in each case, so the live tool set and its inputSchemas
+  are auth-gated. The WordPress Abilities API endpoint that backs the tool list (/wp-json/wp-abilities/v1/abilities)
+  also returned 401. No tool list is recorded because none could be observed; nothing is inferred or invented.'
+scope_note: This MCP server is served from FundGuard's corporate WordPress site, not from the FundGuard
+  investment accounting platform. It is a genuine, provider-hosted MCP surface reachable at a FundGuard-controlled
+  origin and advertised through standards-based discovery metadata, but a consumer should not expect it
+  to expose fund/NAV/accounting operations. FundGuard's product API has no public documentation or contract.
 x-evidence:
 - fetched: '2026-08-01'
   url: https://www.fundguard.com/.well-known/oauth-protected-resource
@@ -55,4 +63,11 @@ x-evidence:
 - fetched: '2026-08-01'
   url: https://www.fundguard.com/wp-json/mcp/mcp-oauth-server
   http_status: 401
-  note: 'POST tools/list -> {"code":"mcp_unauthorized","message":"MCP authentication required."}'
+  note: POST tools/list -> {"code":"mcp_unauthorized","message":"MCP authentication required."}
+deployment:
+  mode: remote
+  endpoint: https://www.fundguard.com/wp-json/mcp/mcp-oauth-server
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census
