@@ -21,6 +21,20 @@ created: '2026-08-01'
 modified: '2026-08-01'
 tags:
 - investment-accounting
+- Fund Accounting
+- ibor
+- abor
+- NAV
+- Asset Management
+- portfolio-accounting
+- Private Markets
+- Financial-Services
+- Fintech
+- Software-as-a-Service
+- Artificial Intelligence
+- MCP
+tags_raw:
+- investment-accounting
 - fund-accounting
 - ibor
 - abor
@@ -45,6 +59,10 @@ apis:
   humanURL: https://www.fundguard.com/
   baseURL: https://www.fundguard.com/wp-json/mcp/mcp-oauth-server
   tags:
+  - MCP
+  - agent-native
+  - Authentication
+  tags_raw:
   - mcp
   - agent-native
   - oauth2
