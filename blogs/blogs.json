@@ -6,14 +6,13 @@
       "feed_url": "https://kb.fundguard.com/knowledge",
       "title": "",
       "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "method": "none"
     },
     {
       "source": "https://www.fundguard.com/feed/",
       "feed_url": "https://www.fundguard.com/feed/",
       "title": "",
-      "saved": 2,
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -24,6 +23,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 7,
-  "fetched": "2026-08-15T12:11:08Z"
+  "post_count": 9,
+  "fetched": "2026-08-22T20:20:02Z"
 }
