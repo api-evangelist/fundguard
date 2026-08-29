@@ -12,6 +12,17 @@ description: >-
   integration with portfolio management systems, custodians, administrators and data providers, but as of this pass
   FundGuard publishes no public developer portal, API reference or machine-readable API contract — the customer
   knowledge base at kb.fundguard.com is behind a login and the product runs on per-tenant hosts.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.fundguard.com/wp-content/uploads/2020/08/fundguard-logo-cropped.svg
 url: https://raw.githubusercontent.com/api-evangelist/fundguard/refs/heads/main/apis.yml
 x-type: company
