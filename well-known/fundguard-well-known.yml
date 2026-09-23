@@ -2,39 +2,10 @@ generated: '2026-08-01'
 method: searched
 source: https://www.fundguard.com/.well-known/
 host: https://www.fundguard.com
-note: >-
-  Probed every /.well-known/ path in the pipeline against every FundGuard host that resolves. Only
+note: Probed every /.well-known/ path in the pipeline against every FundGuard host that resolves. Only
   www.fundguard.com answered with real documents; the two OAuth metadata documents below advertise a Model
-  Context Protocol server on the corporate WordPress host. Hosts probed and their result are recorded in
-  hosts_probed[] so a later pass does not repeat the work.
-documents:
-- path: /.well-known/oauth-authorization-server
-  spec: RFC 8414
-  status: 200
-  content_type: application/json
-  file: fundguard-oauth-authorization-server.json
-- path: /.well-known/oauth-protected-resource
-  spec: RFC 9728
-  status: 200
-  content_type: application/json
-  file: fundguard-oauth-protected-resource.json
-- path: /.well-known/security.txt
-  spec: RFC 9116
-  status: 404
-- path: /.well-known/openid-configuration
-  spec: OpenID Connect Discovery 1.0
-  status: 404
-- path: /.well-known/api-catalog
-  spec: RFC 9727
-  status: 404
-- path: /.well-known/ai-plugin.json
-  status: 404
-- path: /.well-known/agent-card.json
-  spec: A2A 1.0.0
-  status: 404
-- path: /.well-known/agent.json
-  spec: A2A pre-0.3 legacy
-  status: 404
+  Context Protocol server on the corporate WordPress host. Hosts probed and their result are recorded
+  in hosts_probed[] so a later pass does not repeat the work.
 hosts_probed:
 - host: www.fundguard.com
   resolves: true
@@ -47,9 +18,8 @@ hosts_probed:
   result: /.well-known/mta-sts.txt returned 200 (STSv1, mode enforce, Google Workspace MX)
 - host: platform.fundguard.com
   resolves: false
-  result: >-
-    dangling CNAME - resolves to dr82nty150q0v.cloudfront.net, which returns NOERROR with no A/AAAA records
-    (the CloudFront distribution no longer exists), so the host is unreachable
+  result: dangling CNAME - resolves to dr82nty150q0v.cloudfront.net, which returns NOERROR with no A/AAAA
+    records (the CloudFront distribution no longer exists), so the host is unreachable
 - host: api.fundguard.com
   resolves: false
   result: NXDOMAIN
@@ -77,3 +47,31 @@ hosts_probed:
 x-evidence:
   fetched: '2026-08-01'
   method: HTTP GET, curl, following redirects
+hosts:
+- host: https://www.fundguard.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: fundguard-oauth-authorization-server.json
+    content_type: application/json
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: fundguard-oauth-protected-resource.json
+    content_type: application/json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.
