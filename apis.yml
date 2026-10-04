@@ -53,7 +53,7 @@ tags:
 - Asset Management
 - portfolio-accounting
 - Private Markets
-- Financial-Services
+- Financial Services
 - Fintech
 - Software-as-a-Service
 - Artificial Intelligence
@@ -72,6 +72,7 @@ tags_raw:
 - saas
 - artificial-intelligence
 - mcp
+- Financial-Services
 apis:
 - name: FundGuard Website MCP Server
   description: >-
@@ -85,7 +86,7 @@ apis:
   baseURL: https://www.fundguard.com/wp-json/mcp/mcp-oauth-server
   tags:
   - MCP
-  - agent-native
+  - Agent-Native
   - Authentication
   tags_raw:
   - mcp
@@ -100,6 +101,9 @@ apis:
     url: authentication/fundguard-authentication.yml
   - type: OAuthScopes
     url: scopes/fundguard-scopes.yml
+  x-surface: platform-generated
+  x-platform: wordpress
+  x-platform-surface: mcp-plugin
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
