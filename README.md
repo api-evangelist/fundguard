@@ -64,35 +64,106 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-AI-powered, cloud-native investment accounting operating system for asset managers, asset owners, custodian banks and fund administrators — a single real-time accounting engine covering Fund Accounting/ABOR, Investment Accounting/IBOR and Private Markets portfolio accounting, with shadow and contingent NAV, reconciliation, Report Studio and AI-driven anomaly detection. Founded 2018; New York HQ with offices in Dedham MA, Tel Aviv and London.
+FundGuard is an AI-powered, cloud-native investment accounting operating system for asset managers, asset owners, custodian banks and fund administrators. A single real-time accounting engine acts as the core system of record across Fund Accounting/ABOR, Investment Accounting/IBOR and Private Markets portfolio accounting, supporting mutual funds, ETFs, hedge funds, insurance products and pension funds with multi-book views (ABOR, IBOR, GAAP, tax, performance, currency and custom), shadow and contingent NAV, reconciliation, Report Studio and AI-driven anomaly detection with suggested resolutions. Founded 2018, headquartered in New York with offices in Dedham MA, Tel Aviv and London; backed by Citi, State Street, Key1 Capital, Blumberg Capital, Euclidean Capital, Hamilton Lane, LionBird and Team8, and running on AWS and Microsoft Azure. The platform is marketed as API-first for front- and middle-office integration with portfolio management systems, custodians, administrators and data providers, but as of this pass FundGuard publishes no public developer portal, API reference or machine-readable API contract — the customer knowledge base at kb.fundguard.com is behind a login and the product runs on per-tenant hosts.
 
-- Website — https://www.fundguard.com/
-- Product — https://www.fundguard.com/product/
-- News — https://www.fundguard.com/news/
-- Knowledge base (login required) — https://kb.fundguard.com/knowledge
-- Secondary market — https://forgeglobal.com/fundguard_stock/
+**Areas:** investment-accounting · Fund Accounting · ibor · abor · NAV · Asset Management · portfolio-accounting · Private Markets · Financial Services · Fintech · Software-as-a-Service · Artificial Intelligence
 
-## API surface (as of 2026-08-01)
+## FundGuard on APIs.io
 
-FundGuard markets an API-first platform but publishes **no public developer portal, API reference, OpenAPI/AsyncAPI/GraphQL contract, SDK or CLI**. Contract discovery was run against every host that resolves plus every name in certificate transparency — see `x-contract-discovery` in `apis.yml`.
+Everything profiled for FundGuard is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/fundguard/](https://apis.io/providers/fundguard/)** — or go straight to one of the APIs or properties below.
 
-The one publicly reachable machine-readable surface is a **Model Context Protocol server on the corporate web host**, advertised through RFC 8414 and RFC 9728 metadata:
+### APIs (1)
 
-- `https://www.fundguard.com/wp-json/mcp/mcp-oauth-server` — OAuth 2.1 (authorization_code + PKCE S256), scope `mcp`, `tools/list` returns 401 anonymously.
+- [FundGuard Website MCP Server](https://apis.io/apis/fundguard/fundguard-website-mcp-server/) — A Model Context Protocol server served from FundGuard's own corporate web host via the WordPress MCP adapter, advertised through RFC 8414 OAuth…
 
-This is the WordPress-site MCP adapter, not the investment accounting platform API.
+### Published properties
 
-## Artifacts
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-| Dir | File | Method |
-|---|---|---|
-| `well-known/` | index + two verbatim OAuth metadata documents | searched |
-| `mcp/` | `fundguard-mcp.yml` | probed |
-| `authentication/` | `fundguard-authentication.yml` | probed |
-| `scopes/` | `fundguard-scopes.yml` | probed |
-| `conformance/` | `fundguard-conformance.yml` | searched |
-| `lifecycle/` | `fundguard-lifecycle.yml` | searched |
-| `security/` | `fundguard-domain-security.yml` | probed |
-| `llms/` | `fundguard-llms.txt` | generated |
+#### MCP servers (1)
 
-No A2A agent card, security.txt, vulnerability disclosure program, trust center, status page, changelog, SDK/package, CLI or sandbox was found. Those absences are recorded in the artifacts above rather than left blank.
+Model Context Protocol servers that expose the API to agents.
+
+- [fundguard](https://apis.io/servers/fundguard/fundguard/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Fundguard Authentication](https://apis.io/security/fundguard/fundguard-authentication/)
+- [Fundguard Domain Security](https://apis.io/security/fundguard/fundguard-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Fundguard Scopes](https://apis.io/scopes/fundguard/fundguard-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.fundguard.com/)
+- [Documentation](https://www.fundguard.com/product/)
+- [Sign up](https://www.fundguard.com/request-a-demo/)
+- [Support](https://www.fundguard.com/contact-us/)
+- [Blog](https://www.fundguard.com/news/)
+- [Compliance](https://www.fundguard.com/digital-operational-resilience-act/)
+- [Terms of service](https://www.fundguard.com/terms-of-use/)
+- [Privacy policy](https://www.fundguard.com/privacy/)
+- [GitHub](https://github.com/FundGuard)
+
+## API Evangelist rating
+
+**Kin Score 27.4** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 42.1 |
+
+**Agent readiness 16.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 36.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/fundguard/](https://apis.io/providers/fundguard/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for FundGuard: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/fundguard/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
